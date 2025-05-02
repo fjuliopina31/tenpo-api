@@ -1,0 +1,36 @@
+services:
+
+  db:
+    image: postgres:15
+    container_name: tenpo_db_postgres
+    environment:
+      POSTGRES_DB: tenpoDB
+      POSTGRES_USER: tenpo1
+      POSTGRES_PASSWORD: tenpo1*
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - tenpo-net
+
+  app:
+    image: fjuliopina33/tenpo-api
+    container_name: tenpo-app
+    depends_on:
+        - db
+    command: ["./wait-for-it.sh", "db:5432", "--", "java", "-jar", "/app/demo.jar"]
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/tenpoDB
+      SPRING_DATASOURCE_USERNAME: tenpo1
+      SPRING_DATASOURCE_PASSWORD: tenpo1*
+    ports:
+      - "8080:8080"
+    networks:
+      - tenpo-net
+
+volumes:
+  pgdata:
+
+networks:
+  tenpo-net:
