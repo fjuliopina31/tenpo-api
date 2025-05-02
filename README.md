@@ -1,8 +1,12 @@
 # 🧾 Tenpo API - Despliegue con Docker Compose desde Docker Hub
 
+imagen docker hub
+-- Se obtiene la imagen de Docker Hub
+docker pull fjuliopina33/tenpo-api
+
 Este proyecto despliega una API Java Spring Boot usando una imagen almacenada en Docker Hub y una base de datos PostgreSQL. Se utiliza `docker-compose` para orquestar los servicios.
 
----
+--- 
 
 ## 📦 Requisitos
 
